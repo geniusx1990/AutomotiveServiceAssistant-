@@ -312,7 +312,7 @@ Example request body:
     Content-Type: application/json
 ```
 
-- Request: `GET api/parts/{id}` - get necessary parts using params for filter
+- Request: `GET api/parts/:id` - get necessary parts using params for filter
   - Response:
 
 ```
@@ -373,7 +373,7 @@ Example request body:
 | Parameter    | Type   | Required | Description               |
 |--------------|--------|----------|---------------------------|
 | `id `        | string | Yes      | The service id to delete. |
-- Request: `DELETE api/parts/{id}` - delete part by id
+- Request: `DELETE api/parts/:id` - delete part by id
   - Response:
 
 ```
@@ -395,7 +395,7 @@ Example request body:
 | Parameter    | Type   | Required | Description     |
 |--------------|--------|----------|-----------------|
 | `id `        | string | Yes      | The service id. |
-- Request: `PUT api/parts/{id}` - update spare part, only admin can do this
+- Request: `PUT api/parts/:id` - update spare part, only admin can do this
   - Response:
 
 ```
@@ -559,13 +559,13 @@ Example request body:
 Clone this repo with command
 
 ```
-git clone git@github.com:ilyaKarachun/HospitalSolvd.git
+git clone git@github.com:geniusx1990/AutomotiveServiceAssistant.git
 ```
 
 Go to project folder
 
 ```
-cd hospitalSolvd
+cd AutomotiveServiceAssistant
 ```
 
 Install dependencies
