@@ -65,7 +65,7 @@ Base URL
     ]
 ```
 
-- Request: `GET api/v1/users/{userId}` - get one user, user type will be determined automatically
+- Request: `GET api/v1/users/:userId` - get one user, user type will be determined automatically
   - Query Parameters
 
 | Parameter | Type   | Required | Description  |
@@ -249,7 +249,7 @@ Example request body:
 |-----------|--------|----------|---------------------------------|
 | `userId ` | string | Yes      | The user id for delete account. |
 
-- Request: `DELETE api/users/{userId}` - DELETE user, only admin can do this
+- Request: `DELETE api/users/:userId` - DELETE user, only admin can do this
   - Response:
 
 ```
@@ -501,7 +501,7 @@ Example request body:
 
 ```
 
-- Request: `GET api/repair-requests:id` - Returns detailed information about a repair request by ID. 
+- Request: `GET api/repair-requests/:id` - Returns detailed information about a repair request by ID. 
   - Response:
 ```
     HTTP/1.1 200 OK
@@ -538,7 +538,7 @@ Example request body:
 | Parameter        | Type   | Required | Description            |
 |------------------|--------|----------|------------------------|
 | `request_id `    | string | Yes      | The repair request id. |
-- Request: `DELETE api/repair-request?request_id=:request_id` - delete selected appointmen
+- Request: `DELETE api/repair-request/:request_id` - delete selected appointmen
   - Response:
 ```
     HTTP/1.1 200 OK
