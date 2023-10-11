@@ -65,7 +65,7 @@ Base URL
     ]
 ```
 
-- Request: `GET api/v1/users/:userId` - get one user, user type will be determined automatically
+- Request: `GET api/users/:userId` - get one user, user type will be determined automatically
   - Query Parameters
 
 | Parameter | Type   | Required | Description  |
@@ -109,7 +109,7 @@ Base URL
 | `firstName ` | string | Yes      | The user firstName.<br/> This queryParam <br/>to search for. |
 | `lastName `  | string | Yes      | The user lastName.<br/> This queryParam <br/>to search for. |
 
-- Request: `GET api/v1/users?role=Customer` - filter for customer or admin
+- Request: `GET api/users?role=Customer` - filter for customer or admin
   - Response:
 ```
   HTTP/1.1 200 OK
