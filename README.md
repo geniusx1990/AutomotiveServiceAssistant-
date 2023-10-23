@@ -723,6 +723,216 @@ This endpoint allows you to delete a single mark by ID.
 ```
 </details>
 </details>
+
+## Endpoint `api/v1/models`: <a name="models"></a>
+<details>
+
+### GET all models
+##### `GET api/v1/models`
+<details>
+
+This endpoint allows you to get a list of models.
+
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  [
+    {
+        "id": 1,
+        "model": "E-class"
+    },
+    {
+        "id": 2,
+        "model": "C-class"
+    },
+    ....
+]
+```
+</details>
+
+### GET one model
+##### `GET api/v1/models/:id`
+
+<details>
+This endpoint allows you to retrieve a single model by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The model id to get the model. |
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "id": 1,
+    "model": "E-class"
+  }
+```
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    {
+      error: "Model not found." 
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while fetching the model."
+    }
+```
+</details>
+
+### POST Create new model
+##### `POST api/v1/models`
+
+<details>
+This endpoint allows you to register a new model in the system.
+The request body should contain the required information 
+for creating a new model, such as model name.
+
+* **Request:**
+```
+  {
+    "model": "M-class"
+  }
+```
+* **Success Response:**
+
+```
+  HTTP/1.1 201 Created
+  Content-Type: application/json
+  {
+    "message": "Model created successfully",
+    "model": {
+        "id": 7,
+        "model": "M-class"
+    }
+  }
+```
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    error: 'Invalid or missing model data.'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+   Content-Type: application/json
+  {
+    error: "An error occurred while creating a mark."
+  }
+```
+</details>
+
+
+### PUT Update model
+##### `PUT api/v1/models`
+
+<details>
+This endpoint allows you to update a model info in the system.
+
+Example request body:
+```
+  {
+    "id": 5,
+    "model": "E-class",
+  }
+```
+
+* **Success Response:**
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "message": "Mark updated successfully",
+    "updatedModel": {
+        "id": 5,
+        "model": "E-class"
+    }
+}
+```
+
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    message: 'ID not specified'
+  }
+
+  HTTP/1.1 404 Not Found
+  Content-Type: application/json
+  {
+    error: 'Model not found'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+  Content-Type: application/json
+  {
+    error: "An error occurred while updating the model."
+  }
+```
+</details>
+
+### DELETE Delete model
+##### `DELETE api/models/:id`
+
+<details>
+This endpoint allows you to delete a single model by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The model id for delete model. |
+
+
+* **Success Response:**
+
+```
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    {
+        "message": "Model deleted successfully",
+        "deletedModel": {
+            "id": 5,
+            "model": "E-class"
+        }
+    }
+```
+
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+
+    {
+      error: "Model not found"
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while deleting the model."
+    }
+```
+</details>
+</details>
+
 </details>
 
 
