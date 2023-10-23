@@ -19,7 +19,7 @@ Content:
    - [Endpoints: users](#users)
    - [Endpoints: parts](#parts)
    - [Endpoints: marks](#marks)
-   - [Endpoints: marks](#models)
+   - [Endpoints: models](#models)
    - [Endpoints: repair-requests](#repair-requests)
 4. [Download and install App](#Install)
 5. [Run App with Docker](#docker)
@@ -272,11 +272,6 @@ This endpoint allows you to delete a single user by ID.
 </details>
 
 ## Endpoint `api/v1/parts`: <a name="parts"></a>
-- Query Parameters
-
-| Parameter | Type   | Required | Description                    |
-|-----------|--------|----------|--------------------------------|
-| `name `   | string | Yes      | The service name to searching. |
 
 <details>
 
@@ -528,6 +523,8 @@ This endpoint allows you to delete a par in the system.
 
 ### GET all marks
 ##### `GET api/v1/marks`
+<details>
+
 This endpoint allows you to get a list of marks of vehicle.
 
 
@@ -681,8 +678,8 @@ Example request body:
 ```
 </details>
 
-### DELETE Delete part
-##### `DELETE api/parts/:id`
+### DELETE Delete mark
+##### `DELETE api/marks/:id`
 
 <details>
 This endpoint allows you to delete a single mark by ID.
@@ -724,6 +721,7 @@ This endpoint allows you to delete a single mark by ID.
       error: "An error occurred while deleting the mark."
     }
 ```
+</details>
 </details>
 </details>
 
