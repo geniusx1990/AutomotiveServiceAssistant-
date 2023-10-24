@@ -22,6 +22,8 @@ Content:
    - [Endpoints: models](#models)
    - [Endpoints: vehicles](#vehicles)
    - [Endpoints: orders](#orders)
+   - [Endpoints: order-parts](#order-parts)
+
 4. [Download and install App](#Install)
 5. [Run App with Docker](#docker)
 
@@ -1338,7 +1340,7 @@ Example request body:
 ##### `DELETE api/orders/:id`
 
 <details>
-This endpoint allows you to delete a single vehicle by ID.
+This endpoint allows you to delete a single order by ID.
 
 - Query Parameters
 
@@ -1377,6 +1379,222 @@ This endpoint allows you to delete a single vehicle by ID.
     Content-Type: application/json
     {
       error: "An error occurred while deleting the order."
+    }
+```
+</details>
+</details>
+
+
+## Endpoint `api/v1/order-parts`: <a name="order-parts"></a>
+<details>
+
+### GET all order-parts
+##### `GET api/v1/order-parts`
+<details>
+
+This endpoint allows you to get a list of order-parts.
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  [
+    {
+        "id": 5,
+        "order_id": 1,
+        "part_id": 1
+    },
+    {
+        "id": 7,
+        "order_id": 1,
+        "part_id": 1
+    }
+  ]
+```
+</details>
+
+### GET one order-part
+##### `GET api/v1/order-parts/:id`
+
+<details>
+This endpoint allows you to retrieve a single order part by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The order id to get the order part. |
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "id": 5,
+    "order_id": 1,
+    "part_id": 1
+  }
+```
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    {
+      error: "Order part not found." 
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while fetching order parts."
+    }
+```
+</details>
+
+### POST Create new order-part
+##### `POST api/v1/order-parts`
+
+<details>
+This endpoint allows you to register a new order part in the system.
+The request body should contain the required information 
+for creating a new order part, such as order id, part id.
+
+* **Request:**
+```
+  {
+    "order_id": 1,
+    "part_id": 1
+  }
+```
+* **Success Response:**
+
+```
+  HTTP/1.1 201 Created
+  Content-Type: application/json
+  {
+    "message": "Order part created successfully",
+    "orderPart": {
+        "id": 8,
+        "order_id": 1,
+        "part_id": 1
+    }
+  }
+```
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    error: 'Invalid or missing data in the request.'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+   Content-Type: application/json
+  {
+    error: "An error occurred while creating a part for order."
+  }
+```
+</details>
+
+
+### PUT Update order-part
+##### `PUT api/v1/order-parts`
+
+<details>
+This endpoint allows you to update an order part info in the system.
+
+Example request body:
+```
+  {
+    "id": 8,
+    "order_id": 1,
+    "part_id": 3
+  }
+```
+
+* **Success Response:**
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "message": "Order part updated successfully",
+    "orderPart": {
+        "id": 8,
+        "order_id": 1,
+        "part_id": 3
+    }
+  }
+```
+
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    message: 'ID not specified'
+  }
+
+  HTTP/1.1 404 Not Found
+  Content-Type: application/json
+  {
+    error: 'Order part not found'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+  Content-Type: application/json
+  {
+    error: "An error occurred while updating the order part."
+  }
+```
+</details>
+
+### DELETE Delete order-part
+##### `DELETE api/order-parts/:id`
+
+<details>
+This endpoint allows you to delete a single order part by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The order part id for delete order part. |
+
+
+* **Success Response:**
+
+```
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    {
+    "message": "Order part deleted successfully",
+    "part": {
+        "id": 8,
+        "order_id": 1,
+        "part_id": 3
+      }
+    }
+```
+
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+
+    {
+      error: "Order part not found"
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while deleting the order part."
     }
 ```
 </details>
