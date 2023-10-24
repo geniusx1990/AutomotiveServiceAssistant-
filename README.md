@@ -23,6 +23,7 @@ Content:
    - [Endpoints: vehicles](#vehicles)
    - [Endpoints: orders](#orders)
    - [Endpoints: order-parts](#order-parts)
+   - [Endpoints: auth](#auth)
 
 4. [Download and install App](#Install)
 5. [Run App with Docker](#docker)
@@ -1600,6 +1601,105 @@ This endpoint allows you to delete a single order part by ID.
 </details>
 </details>
 
+## Endpoint `api/v1/auth`: <a name="order-parts"></a>
+<details>
+
+### POST User registration
+##### `POST api/v1/auth/registration`
+
+<details>
+This endpoint allows you to register a new user in the system. 
+To register a new user, you need to send a POST request with 
+a JSON body containing the following required information:
+name: The user's name.
+email: The user's email address.
+password: The user's password, which will be securely hashed before storage.
+phonenumber: The user's phone number.
+role: The role or access level of the user.
+
+* **Request:**
+```
+  {
+    "name": "test",
+    "email": "test@gmail.com",
+    "password": "test",
+    "phonenumber": "8888",
+    "role": "User"
+  }
+```
+* **Success Response:**
+
+```
+  HTTP/1.1 201 Created
+  Content-Type: application/json
+  {
+    "message": "user registered"
+  }
+```
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    "message": "Email is already taken, please use another email"
+  }
+
+   HTTP/1.1 500 Internal Server Error
+   Content-Type: application/json
+  {
+    error: "Registration error."
+  }
+```
+</details>
+
+### POST User authorization
+##### `POST api/v1/auth/login`
+
+<details>
+This endpoint handles user login functionality within the system. 
+To log in, a user must send a POST request with a JSON body containing the following information:
+email: The user's email address.
+password: The user's password.
+
+* **Request:**
+```
+  {
+    "email": "inga@gmail.com",
+    "password": "inga",
+  }
+```
+* **Success Response:**
+
+```
+  HTTP/1.1 201 Created
+  Content-Type: application/json
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5ODEzODkwNCwiZXhwIjoxNjk4MjI1MzA0fQ.QUvSl9iyjTpQZe9qGMsDaomduZaYVrefTq4JteKOA0U"
+  }
+```
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    "message": "Incorrect password"
+  }
+
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    "message": "The user with ${email} was not found"
+  }
+
+   HTTP/1.1 500 Internal Server Error
+   Content-Type: application/json
+  {
+    error: "Login error."
+  }
+```
+</details>
 
 </details>
 
