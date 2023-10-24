@@ -20,7 +20,7 @@ Content:
    - [Endpoints: parts](#parts)
    - [Endpoints: marks](#marks)
    - [Endpoints: models](#models)
-   - [Endpoints: repair-requests](#repair-requests)
+   - [Endpoints: vehicles](#vehicles)
 4. [Download and install App](#Install)
 5. [Run App with Docker](#docker)
 
@@ -932,6 +932,233 @@ This endpoint allows you to delete a single model by ID.
 ```
 </details>
 </details>
+
+## Endpoint `api/v1/vehicles`: <a name="vehicles"></a>
+<details>
+
+### GET all vehicles
+##### `GET api/v1/vehicles`
+<details>
+ id | mark_id | model_id | vehicle_year 
+This endpoint allows you to get a list of vehicles.
+
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  [
+    {
+        "id": 1,
+        "mark_id": 2,
+        "model_id": 3,
+        "vehicle_year": 2016
+    },
+    {
+        "id": 2,
+        "mark_id": 3,
+        "model_id": 3,
+        "vehicle_year": 2016
+    },
+    ...
+  ]
+```
+</details>
+
+### GET one vehicle
+##### `GET api/v1/vehicles/:id`
+
+<details>
+This endpoint allows you to retrieve a single vehicle by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The vehicle id to get the vehicle. |
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "id": 1,
+    "mark_id": 2,
+    "model_id": 3,
+    "vehicle_year": 2016
+  }
+```
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    {
+      error: "Vehicle not found." 
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while fetching the vehicle."
+    }
+```
+</details>
+
+### POST Create new vehicle
+##### `POST api/v1/vehicles`
+
+<details>
+This endpoint allows you to register a new vehicle in the system.
+The request body should contain the required information 
+for creating a new vehicle, such as model, mark, vehicle year.
+
+* **Request:**
+```
+  {
+    "mark_id": 2,
+    "model_id": 3,
+    "vehicle_year": 2016
+  }
+```
+* **Success Response:**
+
+```
+  HTTP/1.1 201 Created
+  Content-Type: application/json
+  {
+    "message": "Vehicle created successfully",
+    "vehicle": {
+        "id": 4,
+        "mark_id": 2,
+        "model_id": 3,
+        "vehicle_year": 2016
+    }
+  }
+```
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    error: 'Invalid or missing data in the request.'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+   Content-Type: application/json
+  {
+    error: "An error occurred while creating a vehicle."
+  }
+```
+</details>
+
+
+### PUT Update vehicle
+##### `PUT api/v1/vehicles`
+
+<details>
+This endpoint allows you to update a vehicle info in the system.
+
+Example request body:
+```
+  { 
+    "id": 4,
+    "mark_id": 2,
+    "model_id": 3,
+    "vehicle_year": 2011
+  }
+```
+
+* **Success Response:**
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "message": "Vehicle updated successfully",
+    "vehicle": {
+        "id": 4,
+        "mark_id": 2,
+        "model_id": 3,
+        "vehicle_year": 2011
+    }
+  }
+```
+
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    message: 'ID not specified'
+  }
+
+  HTTP/1.1 404 Not Found
+  Content-Type: application/json
+  {
+    error: 'Vehicle not found'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+  Content-Type: application/json
+  {
+    error: "An error occurred while updating the vehicle."
+  }
+```
+</details>
+
+### DELETE Delete vehicle
+##### `DELETE api/vehicles/:id`
+
+<details>
+This endpoint allows you to delete a single vehicle by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The vehicle id for delete vehicle. |
+
+
+* **Success Response:**
+
+```
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    {
+    "message": "Vehicle deleted successfully",
+    "vehicle": {
+        "id": 6,
+        "mark_id": 3,
+        "model_id": 3,
+        "vehicle_year": 2011
+      }
+    }
+```
+
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+
+    {
+      error: "Vehicle not found"
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while deleting the vehicle."
+    }
+```
+</details>
+</details>
+
+
 
 </details>
 
