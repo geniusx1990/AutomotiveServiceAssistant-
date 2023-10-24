@@ -21,6 +21,7 @@ Content:
    - [Endpoints: marks](#marks)
    - [Endpoints: models](#models)
    - [Endpoints: vehicles](#vehicles)
+   - [Endpoints: orders](#orders)
 4. [Download and install App](#Install)
 5. [Run App with Docker](#docker)
 
@@ -939,7 +940,7 @@ This endpoint allows you to delete a single model by ID.
 ### GET all vehicles
 ##### `GET api/v1/vehicles`
 <details>
- id | mark_id | model_id | vehicle_year 
+
 This endpoint allows you to get a list of vehicles.
 
 
@@ -1158,6 +1159,228 @@ This endpoint allows you to delete a single vehicle by ID.
 </details>
 </details>
 
+## Endpoint `api/v1/orders`: <a name="orders"></a>
+<details>
+
+### GET all orders
+##### `GET api/v1/orders`
+<details>
+
+This endpoint allows you to get a list of orders.
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  [
+    {
+        "id": 1,
+        "order_date": "2023-11-09",
+        "status": "confirmed",
+        "user_id": 2
+    },
+    {
+        "id": 3,
+        "order_date": "2222-03-09",
+        "status": "in progress",
+        "user_id": 1
+    }
+]
+```
+</details>
+
+### GET one order
+##### `GET api/v1/orders/:id`
+
+<details>
+This endpoint allows you to retrieve a single order by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The order id to get the order. |
+
+* **Success Response:**
+
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+      "id": 1,
+      "order_date": "2023-11-09",
+      "status": "confirmed",
+      "user_id": 2
+  }
+```
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    {
+      error: "Order not found." 
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while fetching the order."
+    }
+```
+</details>
+
+### POST Create new order
+##### `POST api/v1/orders`
+
+<details>
+This endpoint allows you to register a new order in the system.
+The request body should contain the required information 
+for creating a new order, such as order date, status, user id.
+
+* **Request:**
+```
+  {
+      "order_date": "2023-11-09",
+      "status": "confirmed",
+      "user_id": 2
+  }
+```
+* **Success Response:**
+
+```
+  HTTP/1.1 201 Created
+  Content-Type: application/json
+  {
+    "message": "Order created successfully",
+    "order": {
+        "id": 4,
+        "order_date": "2023-11-08T21:00:00.000Z",
+        "status": "confirmed",
+        "user_id": 2
+    }
+  }
+```
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    error: 'Invalid or missing data in the request.'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+   Content-Type: application/json
+  {
+    error: "An error occurred while creating order."
+  }
+```
+</details>
+
+
+### PUT Update order
+##### `PUT api/v1/orders`
+
+<details>
+This endpoint allows you to update an order info in the system.
+
+Example request body:
+```
+  {
+    "id": 4,
+    "order_date": "2023-12-08T21:00:00.000Z",
+    "status": "confirmed",
+    "user_id": 2
+}
+```
+
+* **Success Response:**
+```
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  {
+    "message": "Order updated successfully",
+    "order": {
+        "id": 4,
+        "order_date": "2023-12-07T21:00:00.000Z",
+        "status": "confirmed",
+        "user_id": 2
+    }
+  }
+```
+
+* **Error Response:**
+
+```
+  HTTP/1.1 400 Bad Request
+  Content-Type: application/json
+  {
+    message: 'ID not specified'
+  }
+
+  HTTP/1.1 404 Not Found
+  Content-Type: application/json
+  {
+    error: 'Order not found'
+  }
+
+   HTTP/1.1 500 Internal Server Error
+  Content-Type: application/json
+  {
+    error: "An error occurred while updating the order."
+  }
+```
+</details>
+
+### DELETE Delete order
+##### `DELETE api/orders/:id`
+
+<details>
+This endpoint allows you to delete a single vehicle by ID.
+
+- Query Parameters
+
+| Parameter    | Type   | Required | Description               |
+|--------------|--------|----------|---------------------------|
+| `id=[integer]`| number| Yes      | The order id for delete order. |
+
+
+* **Success Response:**
+
+```
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    {
+    "message": "Order deleted successfully",
+    "order": {
+        "id": 4,
+        "order_date": "2023-12-07T21:00:00.000Z",
+        "status": "confirmed",
+        "user_id": 2
+      }
+    }
+```
+
+* **Error Response:**
+
+```
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+
+    {
+      error: "Order not found"
+    }
+
+    HTTP/1.1 500 Internal Server Error
+    Content-Type: application/json
+    {
+      error: "An error occurred while deleting the order."
+    }
+```
+</details>
+</details>
 
 
 </details>
